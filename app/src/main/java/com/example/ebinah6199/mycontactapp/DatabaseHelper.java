@@ -1,5 +1,6 @@
 package com.example.ebinah6199.mycontactapp;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -33,7 +34,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+    public void onUpgrade(SQLiteDatabase db, int i, int i1) {
+        db.execSQL(SQL_DELETE_ENTRIES);
+        Log.d("MyContactApp", "DatabaseHelper: upgraded database");
+    }
+    public boolean insertData(String name){
+        Log.d("MyContactApp", "DatabaseHelper: upgrading database");
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_NAME_CONTACT, name);
 
+        long result = db.insert(TABLE_NAME, null, contentValues);
+        if(result == -1){
+            Log.d("MyContactApp", "Databasehelper: Contact insert - FAILED");
+            return false;
+        }
+        else{
+            Log.d("MyContactApp", "DatabaseHelper: Contact insert - PASSED");
+            return true;
+        }
     }
 }
+
