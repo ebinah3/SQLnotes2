@@ -78,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static final String EXTRA_MESSAGE = "com.example.ebinah6199.mycontactapp MESSAGE";
+
+
     public void searchRecord(View view){
         Log.d("MyContactApp", "MainActivity: Launching SearchActivity");
         String str = "";
@@ -92,10 +94,10 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         Log.d("MyContactApp", String.valueOf(indexes));
-
+        str = "";
         for(int index: indexes) {
             if (index >= 0 && index<string.length()){
-                str = "";
+
                 for (int i = 0; i < 3; i++) {
                     Log.d("MyContactApp", "MainActivity: Launching SearchActivity2");
                     while (string.substring(index).indexOf("\n") != 0) {
